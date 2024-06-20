@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Riddle Game</title>
+    <link href="https://unpkg.com/tailwindcss@2.0.3/dist/tailwind.min.css" rel="stylesheet">
+    <style>
+        .result-message {
+            min-height: 50px;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-r from-indigo-500 to-purple-700 text-white text-center py-24 px-8">
+
+    <div id="container" class="bg-white p-16 rounded-lg shadow-lg max-w-4xl mx-auto text-gray-700">
+        <h1 class="text-6xl font-bold mb-10 text-indigo-700">Riddle Game</h1>
+        <div id="riddle-container" class="mb-10">
+            <div id="riddle-count" class="text-4xl font-semibold mb-6 text-purple-700"></div>
+            <p id="riddle" class="text-3xl text-gray-700"></p>
+        </div>
+        <input type="text" id="answer-input" placeholder="Type your answer here..." class="border border-gray-300 rounded p-5 w-full mb-10 text-gray-700 text-2xl">
+        <div class="button-group mb-10 flex justify-center gap-16">
+            <button id="back-btn" class="bg-blue-500 text-white p-6 rounded-md hover:bg-blue-700 text-2xl" disabled>Back</button>
+            <button id="submit-btn" class="bg-indigo-500 text-white p-6 rounded-md hover:bg-indigo-700 text-2xl">Submit</button>
+            <button id="skip-btn" class="bg-yellow-500 text-black p-6 rounded-md hover:bg-yellow-700 text-2xl">Skip</button>
+        </div>
+        <div id="result" class="result-message text-2xl"></div>
+        <div id="score-container" class="text-2xl mb-10">Score: 0/29</div>
+        <button id="restart-btn" class="bg-green-500 text-white p-6 rounded-md hidden hover:bg-green-700 text-2xl">Restart</button>
+    </div>
+
+    <script>
+        // Store the riddles and their corresponding answers
+        var riddles = [
+            { question: "What has keys but can't open locks?", answer: "piano" },
+            { question: "What has a heart that doesn't beat?", answer: "artichoke" },
+            { question: "What has legs but doesn't walk?", answer: "table" },
+            { question: "What has a neck but no head?", answer: "bottle" },
+            { question: "What can travel around the world while staying in a corner?", answer: "stamp" },
+            { question: "What has one eye but can't see?", answer: "needle" },
+            { question: "What gets wetter as it dries?", answer: "towel" },
+            { question: "What belongs to you but others use it more than you?", answer: "your name" },
+            { question: "What has a spine but no bones?", answer: "book" },
+            { question: "What has many keys but can't open a door?", answer: "piano" },
+            { question: "What has a heart but no blood?", answer: "artichoke" },
+            { question: "What has a face but no eyes?", answer: "clock" },
+            { question: "What has a mouth but doesn't speak?", answer: "river" },
+            { question: "What has one hand but can't clap?", answer: "clock" },
+            { question: "What has a leg but doesn't walk?", answer: "table" },
+            { question: "What gets wetter as it dries?", answer: "towel" },
+            { question: "What has a spine but no bones?", answer: "book" },
+            { question: "What has a hand but can't clap?", answer: "clock" },
+            { question: "What has a mouth but doesn't speak?", answer: "river" },
+            { question: "What gets wetter as it dries?", answer: "towel" },
+            { question: "What has many keys but can't open a door?", answer: "piano" },
+            { question: "What has a face but no eyes?", answer: "clock" },
+            { question: "What has a hand but can't clap?", answer: "clock" },
+            { question: "What has a mouth but doesn't speak?", answer: "river" }
+        ];
+
+        var currentRiddleIndex = 0; // To track the current riddle
+        var correctAnswers = 0; // To track the score
+
+        var riddleContainer = document.getElementById("riddle");
+        var riddleCount = document.getElementById("riddle-count");
+        var answerInput = document.getElementById("answer-input");
+        var submitButton = document.getElementById("submit-btn");
+        var backButton = document.getElementById("back-btn");
+        var skipButton = document.getElementById("skip-btn");
+        var resultDiv = document.getElementById("result");
+        var scoreContainer = document.getElementById("score-container");
+        var restartButton = document.getElementById("restart-btn");
+
+        // Update the riddle on the page
+        function updateRiddle() {
+            riddleContainer.textContent = riddles[currentRiddleIndex].question;
+            riddleCount.textContent = `Riddle ${currentRiddleIndex + 1} of 29`;
+            answerInput.value = "";
+            resultDiv.textContent = "";
+            submitButton.disabled = false;
+            backButton.disabled = currentRiddleIndex === 0; // Disable back button on first riddle
+            skipButton.disabled = currentRiddleIndex === riddles.length - 1; // Disable skip button on last riddle
+            restartButton.classList.add("hidden");
+        }
+
+        // Event listener for submit button
+        submitButton.addEventListener("click", function() {
+            var userAnswer = answerInput.value.toLowerCase(); // Convert to lowercase
+            var correctAnswer = riddles[currentRiddleIndex].answer.toLowerCase();
+            if (userAnswer === correctAnswer) {
+                correctAnswers++;
+                resultDiv.textContent = "Correct!";
+                resultDiv.classList.add("text-green-500");
+                updateScoreAndCheckCompletion();
+            } else {
+                resultDiv.textContent = "Incorrect Answer!";
+                resultDiv.classList.add("text-red-500");
+                answerInput.value = "";
+            }
+        });
+
+        // Event listener for back button
+        backButton.addEventListener("click", function() {
+            if (currentRiddleIndex > 0) {
+                currentRiddleIndex--;
+                updateRiddle();
+            }
+        });
+
+        // Event listener for skip button
+        skipButton.addEventListener("click", function() {
+            if (currentRiddleIndex < riddles.length - 1) {
+                currentRiddleIndex++;
+                updateRiddle();
+            }
+        });
+
+        // Event listener for restart button
+        restartButton.addEventListener("click", function() {
+            currentRiddleIndex = 0;
+            correctAnswers = 0;
+            updateRiddle();
+            updateScore();
+            restartButton.classList.add("hidden");
+        });
+
+        // Update the score and check if the game is complete
+        function updateScoreAndCheckCompletion() {
+            updateScore();
+            if (currentRiddleIndex < riddles.length - 1) {
+                currentRiddleIndex++;
+                updateRiddle();
+            } else {
+                resultDiv.textContent += " Game Over!";
+                submitButton.disabled = true; // Disable the submit button at the end
+                restartButton.classList.remove("hidden"); // Show the restart button at the end
+            }
+        }
+
+        // Update the score display
+        function updateScore() {
+            scoreContainer.textContent = `Score: ${correctAnswers}/29`;
+        }
+
+        // Initialize the first riddle
+        updateRiddle();
+    </script>
+</body>
+</html>
