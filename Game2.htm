@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Lost In Forest</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #e0f7fa; /* Light cyan background */
+            padding: 20px;
+            text-align: center;
+            color: #333; /* Dark gray text */
+        }
+
+        #container {
+            background-color: #ffffff; /* White background for the game container */
+            padding: 40px;
+            border-radius: 16px;
+            display: inline-block; /* Center align */
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+            max-width: 600px; /* Limited max width */
+            font-size: 1.5em; /* Larger font size */
+        }
+
+        h1 {
+            color: #00796b; /* Dark teal header */
+            font-size: 2.5em; /* Larger header font size */
+        }
+
+        #result {
+            margin-top: 20px;
+            font-weight: bold;
+            color: #00796b; /* Dark teal result text */
+            font-size: 1.2em; /* Slightly smaller font size for readability */
+        }
+
+        button {
+            background-color: #00796b; /* Dark teal button background */
+            color: white;
+            padding: 10px 20px; /* Slightly more padding for comfort */
+            border: none;
+            border-radius: 8px;
+            margin: 5px; /* Small margin between buttons */
+            cursor: pointer;
+            font-size: 1.2em; /* Larger font size */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle button shadow */
+        }
+
+        button:hover {
+            background-color: #004d40; /* Darker teal on hover */
+        }
+
+        button:active {
+            background-color: #00251a; /* Darkest teal on click */
+        }
+
+        #restartButton {
+            margin-top: 20px;
+            background-color: #ff7043; /* Orange restart button */
+            color: white;
+            padding: 10px 20px; /* Increased padding for comfort */
+            border: none;
+            border-radius: 8px;
+            cursor: pointer;
+            font-size: 1.2em; /* Larger font size */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle button shadow */
+        }
+
+        #restartButton:hover {
+            background-color: #e65100; /* Darker orange on hover */
+        }
+
+        #restartButton:active {
+            background-color: #bf360c; /* Darkest orange on click */
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Welcome to the LOST IN FOREST Game!</h1>
+        <p>Your journey begins now. Are you ready to start?</p>
+        <button onclick="startGame()">Start Game</button>
+        <div id="result"></div>
+        <button id="restartButton" style="display:none;" onclick="restartGame()">Restart Game</button>
+    </div>
+
+    <script>
+        let story = [
+            {
+                text: "You are standing at the edge of a dark forest. What will you do?",
+                choices: ["Enter the forest", "Walk away"],
+                next: [1, -1]
+            },
+            {
+                text: "You enter the forest and find a path leading deeper inside. Do you want to follow the path?",
+                choices: ["Yes", "No"],
+                next: [2, -1]
+            },
+            {
+                text: "You follow the path and reach a fork. Do you want to go left or right?",
+                choices: ["Left", "Right", "Forward"],
+                next: [3, 4, 5]
+            },
+            {
+                text: "You encounter a group of bandits blocking the path. What will you do?",
+                choices: ["Negotiate", "Fight", "Run away"],
+                next: [6, -1, -1] // Game over if fight or run away
+            },
+            {
+                text: "You take the left path and reach a serene lake. What will you do?",
+                choices: ["Swim across", "Walk around"],
+                next: [7, -1]
+            },
+            {
+                text: "You take the right path and encounter a mountain pass. What will you do?",
+                choices: ["Climb the mountain", "Go around"],
+                next: [8, -1]
+            },
+            {
+                text: "You successfully negotiate with the bandits and continue on your journey.",
+                choices: ["Proceed"],
+                next: [9]
+            },
+            {
+                text: "You swim across the lake and find a hidden cave. What will you do?",
+                choices: ["Explore the cave", "Leave"],
+                next: [10, -1]
+            },
+            {
+                text: "You climb the mountain pass and discover an ancient artifact. What will you do?",
+                choices: ["Take it", "Leave it"],
+                next: [11, -1]
+            },
+            {
+                text: "You reach the end of your journey and find a hidden treasure guarded by a dragon. What will you do?",
+                choices: ["Fight the dragon", "Negotiate", "Run away"],
+                next: [-1, 12, -1] // Game over if fight or run away
+            },
+            {
+                text: "You negotiate with the dragon and it lets you take the treasure. Congratulations, you win!",
+                choices: [],
+                next: []
+            }
+        ];
+
+        let currentStep = 0;
+
+        function startGame() {
+            currentStep = 0;
+            updateGame();
+            document.getElementById("restartButton").style.display = "none"; // Hide restart button at start
+        }
+
+        function restartGame() {
+            currentStep = 0;
+            document.getElementById("result").innerHTML = "";
+            updateGame();
+            document.getElementById("restartButton").style.display = "none"; // Hide restart button at start
+        }
+
+        function updateGame() {
+            let step = story[currentStep];
+            document.getElementById("result").innerHTML = `<p>${step.text}</p>`;
+            if (step.choices.length > 0) {
+                for (let i = 0; i < step.choices.length; i++) {
+                    document.getElementById("result").innerHTML += `<button onclick="makeChoice(${i})">${step.choices[i]}</button>`;
+                }
+            } else {
+                document.getElementById("restartButton").style.display = "block"; // Show restart button if game ends
+            }
+        }
+
+        function makeChoice(choiceIndex) {
+            currentStep = story[currentStep].next[choiceIndex];
+            if (currentStep !== -1) {
+                updateGame();
+            } else {
+                document.getElementById("result").innerHTML = "<p>Game Over! Try again!</p>";
+                document.getElementById("restartButton").style.display = "block"; // Show restart button if game ends
+            }
+        }
+    </script>
+</body>
+</html>
