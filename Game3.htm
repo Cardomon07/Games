@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Guess the Number Game</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 40px; /* Larger padding for a spacious layout */
+            background-color: #f0f8ff; /* Light blue background */
+        }
+
+        #container {
+            background-color: #ffffff; /* White background for the game container */
+            padding: 80px; /* Larger padding for larger size */
+            border-radius: 16px;
+            display: inline-block; /* Adjusted to make responsive */
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Substantial shadow for depth */
+            max-width: 70%; /* Maximum width for larger screens */
+            margin: auto; /* Center the container */
+            font-size: 2em; /* Larger font size */
+        }
+
+        h1 {
+            color: #4CAF50; /* Green header */
+            font-size: 3em; /* Larger header font size */
+        }
+
+        #userInput {
+            padding: 20px; /* Increased padding for larger size */
+            width: 100%; /* Full width for mobile screens */
+            margin-bottom: 40px; /* Adjusted margin for mobile screens */
+            border: 2px solid #ccc; /* Light gray border */
+            border-radius: 8px;
+            font-size: 2em; /* Larger font size */
+        }
+
+        #submitButton {
+            padding: 24px 48px; /* Increased padding for larger size */
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            border-radius: 8px;
+            width: 100%; /* Full width for mobile screens */
+            margin-top: 40px; /* Adjusted margin for mobile screens */
+            font-size: 2.5em; /* Larger font size */
+        }
+
+        #result {
+            margin-top: 40px;
+            font-weight: bold;
+            color: #000;
+            font-size: 2.5em; /* Larger font size */
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <h1>Guess the Number Game</h1>
+        <p>Guess a number between 1 and 100:</p>
+        <input type="text" id="userInput">
+        <button id="submitButton" onclick="checkGuess()">Submit</button>
+        <div id="result"></div>
+    </div>
+
+    <script>
+        var randomNumber = Math.floor(Math.random() * 100) + 1;
+        var attempts = 0;
+
+        function checkGuess() {
+            var userGuess = document.getElementById("userInput").value;
+            userGuess = parseInt(userGuess);
+
+            if (isNaN(userGuess) || userGuess < 1 || userGuess > 100) {
+                document.getElementById("result").innerHTML = "Please enter a valid number between 1 and 100.";
+            } else {
+                attempts++;
+                if (userGuess < randomNumber) {
+                    document.getElementById("result").innerHTML = "Too low! Try again.";
+                } else if (userGuess > randomNumber) {
+                    document.getElementById("result").innerHTML = "Too high! Try again.";
+                } else {
+                    document.getElementById("result").innerHTML = "Congratulations! You guessed the number in " + attempts + " attempts.";
+                }
+            }
+        }
+    </script>
+</body>
+</html>
