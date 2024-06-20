@@ -1,4 +1,5 @@
-<!DOCTYPE html>
+
+ <!DOCTYPE html>
 <html>
 <head>
     <title>Guess the Number Game</title>
@@ -6,56 +7,82 @@
         body {
             font-family: Arial, sans-serif;
             text-align: center;
-            padding: 40px; /* Larger padding for a spacious layout */
+            padding: 40px; /* Increased padding for a spacious layout */
             background-color: #f0f8ff; /* Light blue background */
+            margin: 0; /* Remove default margin */
         }
 
         #container {
             background-color: #ffffff; /* White background for the game container */
-            padding: 80px; /* Larger padding for larger size */
+            padding: 80px; /* Increased padding for larger size */
             border-radius: 16px;
             display: inline-block; /* Adjusted to make responsive */
             box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1); /* Substantial shadow for depth */
             max-width: 70%; /* Maximum width for larger screens */
             margin: auto; /* Center the container */
-            font-size: 2em; /* Larger font size */
+            font-size: 1.5em; /* Refined font size */
+            margin-top: 5%; /* Adds a bit of spacing from the top of the page */
         }
 
         h1 {
             color: #4CAF50; /* Green header */
-            font-size: 3em; /* Larger header font size */
+            font-size: 2.5em; /* Slightly larger header font size */
+            margin-bottom: 20px; /* Adds spacing from the text */
         }
 
         #userInput {
-            padding: 20px; /* Increased padding for larger size */
-            width: 100%; /* Full width for mobile screens */
-            margin-bottom: 40px; /* Adjusted margin for mobile screens */
+            padding: 15px; /* Increased padding for comfort */
+            width: 80%; /* Larger input width */
+            margin-bottom: 40px; /* Adjusted margin */
             border: 2px solid #ccc; /* Light gray border */
             border-radius: 8px;
-            font-size: 2em; /* Larger font size */
+            font-size: 1.5em; /* Refined font size */
         }
 
         #submitButton {
-            padding: 24px 48px; /* Increased padding for larger size */
+            padding: 20px 40px; /* Increased padding for larger size */
             background-color: #4CAF50;
             color: white;
             border: none;
             cursor: pointer;
             border-radius: 8px;
-            width: 100%; /* Full width for mobile screens */
-            margin-top: 40px; /* Adjusted margin for mobile screens */
-            font-size: 2.5em; /* Larger font size */
+            font-size: 1.75em; /* Refined font size */
+            margin-top: 20px; /* Added spacing from input */
         }
 
         #result {
-            margin-top: 40px;
+            margin-top: 30px;
             font-weight: bold;
             color: #000;
-            font-size: 2.5em; /* Larger font size */
+            font-size: 2em; /* Refined font size */
+        }
+       /* Exit Button */
+        #exitButton {
+            position: absolute; /* Position fixed in the top-left corner */
+            top: 10px; /* Offset from the top edge */
+            left: 10px; /* Offset from the left edge */
+            background-color: #ff5722; /* Bright orange background */
+            color: white;
+            padding: 15px 35px; /* Increased padding */
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 2em; /* Larger font size */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle button shadow */
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+
+        #exitButton:hover {
+            background-color: #e64a19; /* Darker orange on hover */
+        }
+
+        #exitButton:active {
+            background-color: #bf360c; /* Darkest orange on click */
         }
     </style>
 </head>
 <body>
+  <button id="exitButton" onclick="exitGame()">Exit</button> 
     <div id="container">
         <h1>Guess the Number Game</h1>
         <p>Guess a number between 1 and 100:</p>
@@ -84,6 +111,10 @@
                     document.getElementById("result").innerHTML = "Congratulations! You guessed the number in " + attempts + " attempts.";
                 }
             }
+        }
+  function exitGame() {
+            // Replace with your desired URL
+            window.location.href = "file:///storage/emulated/0/cardomon/try%207.html"; // Redirect to specified webpage
         }
     </script>
 </body>
