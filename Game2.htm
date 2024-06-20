@@ -5,82 +5,122 @@
     <style>
         body {
             font-family: 'Arial', sans-serif;
-            background-color: #e0f7fa; /* Light cyan background */
+            background-color: #dcedc8; /* Light green background */
             padding: 20px;
             text-align: center;
             color: #333; /* Dark gray text */
+            position: relative; /* Enable positioning */
         }
 
         #container {
-            background-color: #ffffff; /* White background for the game container */
-            padding: 40px;
+            background-color: #f5f5f5; /* Light gray background for the game container */
+            padding: 60px;
             border-radius: 16px;
             display: inline-block; /* Center align */
-            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-            max-width: 600px; /* Limited max width */
-            font-size: 1.5em; /* Larger font size */
+            box-shadow: 0 5px 15px rgba(0, 0,0, 0.1); /* Subtle shadow */
+            max-width: 800px; /* Increased max width */
+            font-size: 2em; /* Larger font size */
         }
 
         h1 {
-            color: #00796b; /* Dark teal header */
-            font-size: 2.5em; /* Larger header font size */
+            color: #2e7d32; /* Dark green header */
+            font-size: 3em; /* Larger header font size */
         }
 
         #result {
-            margin-top: 20px;
+            margin-top: 30px;
             font-weight: bold;
-            color: #00796b; /* Dark teal result text */
-            font-size: 1.2em; /* Slightly smaller font size for readability */
+            color: #388e3c; /* Medium green result text */
+            font-size: 1.5em; /* Slightly larger font size for readability */
         }
 
         button {
-            background-color: #00796b; /* Dark teal button background */
+            background-color: #4caf50; /* Green button background */
             color: white;
-            padding: 10px 20px; /* Slightly more padding for comfort */
+            padding: 15px 30px; /* More padding for comfort */
             border: none;
-            border-radius: 8px;
-            margin: 5px; /* Small margin between buttons */
+            border-radius: 10px;
+            margin: 10px; /* Larger margin between buttons */
             cursor: pointer;
-            font-size: 1.2em; /* Larger font size */
+            font-size: 1.5em; /* Larger font size */
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle button shadow */
+            transition: background-color 0.3s; /* Smooth transition */
         }
 
         button:hover {
-            background-color: #004d40; /* Darker teal on hover */
+            background-color: #388e3c; /* Darker green on hover */
         }
 
         button:active {
-            background-color: #00251a; /* Darkest teal on click */
+            background-color: #2e7d32; /* Darkest green on click */
         }
 
         #restartButton {
-            margin-top: 20px;
-            background-color: #ff7043; /* Orange restart button */
+            margin-top: 30px;
+            background-color: #6d4c41; /* Brown restart button */
             color: white;
-            padding: 10px 20px; /* Increased padding for comfort */
+            padding: 15px 30px; /* Increased padding for comfort */
             border: none;
-            border-radius: 8px;
+            border-radius: 10px;
             cursor: pointer;
-            font-size: 1.2em; /* Larger font size */
+            font-size: 1.5em; /* Larger font size */
             box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle button shadow */
+            transition: background-color 0.3s; /* Smooth transition */
+            display: none; /* Hidden by default */
         }
 
-        #restartButton:hover {
-            background-color: #e65100; /* Darker orange on hover */
+        .hidden {
+            display: none;
         }
 
-        #restartButton:active {
+        /* Celebration Animation */
+        #celebrationText {
+            color: #4caf50; /* Green text */
+            font-size: 3em; /* Larger text size */
+            animation: celebrationAnimation 2s ease-in-out infinite; /* Animation */
+        }
+
+        @keyframes celebrationAnimation {
+            0% { color: #4caf50; } /* Start color */
+            25% { color: #66bb6a; } /* Intermediate color */
+            50% { color: #81c784; } /* Intermediate color */
+            75% { color: #a5d6a7; } /* Intermediate color */
+            100% { color: #4caf50; } /* End color */
+        }
+
+        /* Exit Button */
+        #exitButton {
+            position: absolute; /* Position fixed in the top-left corner */
+            top: 10px; /* Offset from the top edge */
+            left: 10px; /* Offset from the left edge */
+            background-color: #ff5722; /* Bright orange background */
+            color: white;
+            padding: 15px 35px; /* Increased padding */
+            border: none;
+            border-radius: 10px;
+            cursor: pointer;
+            font-size: 2em; /* Larger font size */
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1); /* Subtle button shadow */
+            transition: background-color 0.3s; /* Smooth transition */
+        }
+
+        #exitButton:hover {
+            background-color: #e64a19; /* Darker orange on hover */
+        }
+
+        #exitButton:active {
             background-color: #bf360c; /* Darkest orange on click */
         }
     </style>
 </head>
 <body>
+    <button id="exitButton" onclick="exitGame()">Exit</button> <!-- Exit button -->
     <div id="container">
         <h1>Welcome to the LOST IN FOREST Game!</h1>
         <p>Your journey begins now. Are you ready to start?</p>
         <button onclick="startGame()">Start Game</button>
         <div id="result"></div>
-        <button id="restartButton" style="display:none;" onclick="restartGame()">Restart Game</button>
+        <button id="restartButton" class="hidden" onclick="restartGame()">Restart Game</button>
     </div>
 
     <script>
@@ -147,14 +187,14 @@
         function startGame() {
             currentStep = 0;
             updateGame();
-            document.getElementById("restartButton").style.display = "none"; // Hide restart button at start
+            document.getElementById("restartButton").classList.add("hidden"); // Hide restart button at start
         }
 
         function restartGame() {
             currentStep = 0;
             document.getElementById("result").innerHTML = "";
             updateGame();
-            document.getElementById("restartButton").style.display = "none"; // Hide restart button at start
+            document.getElementById("restartButton").classList.add("hidden"); // Hide restart button at start
         }
 
         function updateGame() {
@@ -165,7 +205,8 @@
                     document.getElementById("result").innerHTML += `<button onclick="makeChoice(${i})">${step.choices[i]}</button>`;
                 }
             } else {
-                document.getElementById("restartButton").style.display = "block"; // Show restart button if game ends
+                document.getElementById("restartButton").classList.remove("hidden"); // Show restart button if game ends
+                document.getElementById("result").innerHTML += `<p id="celebrationText">Congratulations! You Win!</p>`; // Celebration Text
             }
         }
 
@@ -175,9 +216,14 @@
                 updateGame();
             } else {
                 document.getElementById("result").innerHTML = "<p>Game Over! Try again!</p>";
-                document.getElementById("restartButton").style.display = "block"; // Show restart button if game ends
+                document.getElementById("restartButton").classList.remove("hidden"); // Show restart button if game ends
             }
         }
-    </script>
+
+        function exitGame() {
+            // Replace with your desired URL
+            window.location.href = "file:///storage/emulated/0/cardomon/try%207.html"; // Redirect to specified webpage
+        }
+  </script>
 </body>
 </html>
