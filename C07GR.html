@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Seat Numbers</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      text-align: center;
+      background-image: url('https://images.app.goo.gl/BukPG4uhxn6VUc1P7');
+      background-size: cover;
+      background-position: center;
+      background-repeat: no-repeat;
+    }
+  .header {
+      background-color: #000;
+      color: #fff;
+      padding: 20px;
+      border-bottom: 2px solid #ccc;
+      font-family: cursive;
+    }
+
+    #compartment-select {
+      margin: 20px;
+    }
+
+    #seat-container {
+      width: 100%;
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      border-co
+    }
+
+    .seat {
+      width: 60px;
+      padding: 10px;
+      margin: 5px;
+      text-align: center;
+      border: 1px solid #ddd;
+      cursor: pointer;
+    }
+
+    .seat.red {
+      background-color: #ff4d4d;
+    }
+
+    .seat.blue {
+      background-color: #4d79ff;
+    }
+
+    .seat.yellow {
+      background-color: #ffff4d;
+    }
+
+    .seat.green {
+      background-color: #4dff4d;
+    }
+
+    .buttons {
+      margin: 20px;
+    }
+
+    .buttons button {
+      padding: 10px 20px;
+      margin: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    #submitButton {
+      background-color: #4dff4d; /* Green */
+      color: white;
+    }
+
+    #randomButton {
+      background-color: #b300b3; /* Purple */
+      color: white;
+    }
+
+    #restartButton {
+      background-color: #ff3333; /* Red */
+      color: white;
+    }
+  </style>
+</head>
+<body>
+   <div class="header">
+    <h1 style="font-family: cursive;">CARDOMON07</h1>
+    <p>12307-GARIBRATH</p>
+    <p>NLDS <=======> PNBE</p>
+  </div>
+  <div id="compartment-select">
+    <label for="compartments">Select Compartment: </label>
+    <select id="compartments">
+      <option value="compartment1">C07GR-1</option>
+      <option value="compartment2">C07GR-2</option>
+      <option value="compartment3">C07GR-3</option>
+      <option value="compartment4">C07GR-4</option>
+      <option value="compartment5">C07GR-5</option>
+      <option value="compartment6">C07GR-6</option>
+      <option value="compartment7">C07GR-7</option>
+      <option value="compartment8">C07GR-8</option>
+      <option value="compartment9">C07GR-9</option>
+      <option value="compartment10">C07GR-10</option>
+    </select>
+  </div>
+  <div id="seat-container">
+    <!-- Seats will be loaded here -->
+  </div>
+  <div class="buttons">
+    <button id="randomButton">Random</button>
+    <button id="restartButton">Restart</button>
+    <button id="submitButton">Submit</button>
+  </div>
+  <script>
+    document.addEventListener("DOMContentLoaded", function() {
+      const seatContainer = document.getElementById("seat-container");
+      const compartmentsSelect = document.getElementById("compartments");
+      const totalSeats = 80;
+      const colors = ['red', 'blue', 'yellow'];
+      let currentCompartmentIndex = 0;
+
+      function loadSeats() {
+        for (let i = 0; i < totalSeats; i++) {
+          const seat = document.createElement("div");
+          seat.className = `seat ${colors[i % colors.length]}`;
+          seat.innerText = `Seat ${i + 1}`;
+          seatContainer.appendChild(seat);
+
+          seat.addEventListener('click', function() {
+            seat.classList.toggle('green');
+          });
+        }
+      }
+
+      function randomSelectSeats() {
+        const seats = document.querySelectorAll('.seat');
+        const selectedIndices = new Set();
+
+        while (selectedIndices.size < 20) {
+          const randomIndex = Math.floor(Math.random() * totalSeats);
+          selectedIndices.add(randomIndex);
+        }
+
+        selectedIndices.forEach(index => {
+          seats[index].classList.add('green');
+        });
+      }
+
+      function resetSeats() {
+        const seats = document.querySelectorAll('.seat');
+        seats.forEach(seat => seat.classList.remove('green'));
+      }
+
+      function submitForm() {
+        const selectedCompartment = compartmentsSelect.options[currentCompartmentIndex].value;
+        alert(`Form submitted for ${selectedCompartment}!`);
+        compartmentsSelect.remove(currentCompartmentIndex);
+
+        // If there are remaining compartments, select the next one
+        if (currentCompartmentIndex < compartmentsSelect.options.length) {
+          compartmentsSelect.selectedIndex = currentCompartmentIndex; // Automatically select the next compartment
+        }
+
+        resetSeats();
+      }
+
+      document.getElementById('randomButton').addEventListener('click', randomSelectSeats);
+      document.getElementById('submitButton').addEventListener('click', function() {
+        submitForm();
+        currentCompartmentIndex++; // Move to the next compartment
+      });
+      document.getElementById('restartButton').addEventListener('click', function() {
+        seatContainer.innerHTML = '';
+        loadSeats();
+        currentCompartmentIndex = 0; // Reset compartment index
+      });
+
+      loadSeats();
+    });
+  </script>
+</body>
+</html>
