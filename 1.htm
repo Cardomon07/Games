@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Loan Payment</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            text-align: center;
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        input, select {
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+            width: 80%;
+        }
+
+        button {
+            padding: 10px 20px;
+            margin: 10px 5px;
+            border: none;
+            border-radius: 4px;
+            background-color: #5cb85c;
+            color: white;
+            cursor: pointer;
+        }
+
+        button#done {
+            background-color: #337ab7;
+        }
+
+        button:hover {
+            opacity: 0.8;
+        }
+
+        .summary {
+            border: 1px solid #ccc;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+        }
+
+        .tick {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            background-color: #337ab7;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 20px auto;
+        }
+
+        .tick::after {
+            content: '✔';
+            font-size: 2rem;
+            color: white;
+            animation: tickAnimation 1s ease;
+        }
+
+        @keyframes tickAnimation {
+            0% { transform: scale(0); }
+            100% { transform: scale(1); }
+        }
+    </style>
+</head>
+<body>
+    <div class="container" id="mainContainer">
+        <p>《₹》</p>
+        <h1>Loan Payment</h1>
+        <select id="paymentMethod">
+            <option value="" disabled selected>Select payment method</option>
+            <option value="C7PO">C7PO</option>
+            <option value="OTPO">OTPO</option>
+            <option value="OTHER">OTHER</option>
+        </select>
+        <input type="text" id="accountNumber" placeholder="Enter account number">
+        <button id="nextStep">Next</button>
+    </div>
+    <script>
+        document.getElementById('nextStep').addEventListener('click', function() {
+            const paymentMethod = document.getElementById('paymentMethod').value;
+            const accountNumber = document.getElementById('accountNumber').value;
+            if (paymentMethod && accountNumber) {
+                document.getElementById('mainContainer').innerHTML = `
+                    <h1>Loan Payment</h1>
+                    <input type="number" id="loanAmount" placeholder="Enter loan amount in ₹">
+                    <button id="makePayment">Make Payment</button>
+                `;
+
+                document.getElementById('makePayment').addEventListener('click', function() {
+                    const loanAmount = document.getElementById('loanAmount').value;
+                    if (loanAmount) {
+                        this.disabled = true;
+                        setTimeout(() => {
+                            let interest = 0;
+                            if (loanAmount < 100) {
+                                interest = 30;
+                            } else if (loanAmount >= 100 && loanAmount < 500) {
+                                interest = 50;
+                            } else if (loanAmount >= 500 && loanAmount < 1000) {
+                                interest = 100;
+                            } else if (loanAmount >= 1000 && loanAmount < 10000) {
+                                interest = 250;
+                            } else if (loanAmount >= 10000) {
+                                interest = 500;
+                            }
+
+                            const totalAmount = parseInt(loanAmount) + interest + 7;
+
+                            document.getElementById('mainContainer').innerHTML = `
+                                <h1>《₹》</h1>
+                                <h1>Interest Calculation</h1>
+                                <p>Loan Amount: ₹${loanAmount}</p>
+                                <p>Interest: ₹${interest}</p>
+                                <p>Additional Charges: ₹07</p>
+                                <p>Total Amount: ₹${totalAmount}</p>
+                                <button id="goAhead">Go Ahead</button>
+                            `;
+
+                            document.getElementById('goAhead').addEventListener('click', function() {
+                                setTimeout(() => {
+                                    document.getElementById('mainContainer').innerHTML = `
+                                        <h1>Loan Summary</h1>
+                                        <p>Account Number: ${paymentMethod}//${accountNumber}</p>
+                                        <div class="summary">
+                                            <h1>《₹》</h1>
+                                            <p>Loan Amount: ₹${loanAmount}</p>
+                                            <p>Total Interest: ₹${interest}</p>
+                                            <p>Additional Charges: ₹07</p>
+                                            <p>Total Amount: ₹${totalAmount}</p>
+                                        </div>
+                                        <button id="done">Done</button>
+                                    `;
+
+                                    document.getElementById('done').addEventListener('click', function() {
+                                        document.getElementById('mainContainer').innerHTML = `
+                                            <p>《₹》</p>
+                                            <h1>Received Payment of ₹${loanAmount}</h1>
+                                            <div class="tick"></div>
+                                            <p>IN ACCOUNT: ${paymentMethod}${accountNumber}</p>
+                                        `;
+                                    });
+                                }, 2000);
+                            });
+                        }, 2000);
+                    }
+                });
+            }
+        });
+    </script>
+</body>
+</html>
