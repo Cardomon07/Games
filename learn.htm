@@ -1,0 +1,473 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>HTML Tags Showcase</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+        header {
+            background: #35424a;
+            color: white;
+            padding: 20px 0;
+            text-align: center;
+        }
+        main {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+        }
+        .tag-box {
+            background: white;
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            margin: 10px;
+            padding: 20px;
+            width: 300px;
+            transition: transform 0.3s;
+        }
+        .tag-box:hover {
+            transform: scale(1.05);
+        }
+        .tag-box h2 {
+            color: #35424a;
+        }
+        .code-example, .definition, .usage {
+            background: #f4f4f4;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        .output {
+            background: #fff;
+            border: 1px solid #ddd;
+            padding: 10px;
+            margin: 10px 0;
+        }
+        footer {
+            background: #35424a;
+            color: white;
+            text-align: center;
+            padding: 3px 0;
+            position: fixed;
+            width: 100%;
+          height:2.5rem;
+            bottom: 0;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>HTML Tags Showcase</h1>
+    </header>
+    <main>
+        <section class="tag-box">
+            <h2>1. &lt;a&gt; Tag</h2>
+            <div class="definition">
+                <strong>Definition:</strong> The &lt;a&gt; tag defines a hyperlink, which is used to link from one page to another.
+            </div>
+            <div class="usage">
+                <strong>Usage:</strong> Use the &lt;a&gt; tag to create links to other pages, anchors within the same page, email addresses, or any URL.
+            </div>
+            <div class="code-example">
+                <pre><code>&lt;a href="#"&gt;This is a link&lt;/a&gt;</code></pre>
+            </div>
+            <div class="output">
+                <a href="#">This is a link</a>
+            </div>
+        </section>
+        <section class="tag-box">
+            <h2>2. &lt;h1&gt; Tag</h2>
+            <div class="definition">
+                <strong>Definition:</strong> The &lt;h1&gt; tag is used to define the most important heading in HTML, with &lt;h1&gt; being the highest level.
+            </div>
+            <div class="usage">
+                <strong>Usage:</strong> Use the &lt;h1&gt; tag for main titles or headings to give them more weight in SEO.
+            </div>
+            <div class="code-example">
+                <pre><code>&lt;h1&gt;This is a Heading 1&lt;/h1&gt;</code></pre>
+            </div>
+            <div class="output">
+                <h1>This is a Heading 1</h1>
+            </div>
+        </section>
+        <section class="tag-box">
+            <h2>3. &lt;p&gt; Tag</h2>
+            <div class="definition">
+                <strong>Definition:</strong> The &lt;p&gt; tag defines a paragraph.
+            </div>
+            <div class="usage">
+                <strong>Usage:</strong> Use the &lt;p&gt; tag to add text content in paragraph form.
+            </div>
+            <div class="code-example">
+                <pre><code>&lt;p&gt;This is a paragraph.&lt;/p&gt;</code></pre>
+            </div>
+            <div class="output">
+                <p>This is a paragraph.</p>
+            </div>
+        </section>
+        <section class="tag-box">
+            <h2>4. &lt;img&gt; Tag</h2>
+            <div class="definition">
+                <strong>Definition:</strong> The &lt;img&gt; tag is used to embed images in HTML.
+            </div>
+            <div class="usage">
+                <strong>Usage:</strong> Use the &lt;img&gt; tag to display images on the webpage by specifying the source URL in the src attribute.
+            </div>
+            <div class="code-example">
+                <pre><code>&lt;img src="https://via.placeholder.com
+/150" alt="Example Image"&gt;</code></pre>
+            </div>
+            <div class="output">
+                <img src="https://via.placeholder.com/150" alt="Example Image">
+            </div>
+        </section>
+        <section class="tag-box">
+            <h2>5. &lt;ul&gt; and &lt;li&gt; Tags</h2>
+            <div class="definition">
+                <strong>Definition:</strong> The &lt;ul&gt; tag defines an unordered list, and the &lt;li&gt; tag defines a list item.
+            </div>
+            <div class="usage">
+                <strong>Usage:</strong> Use the &lt;ul&gt; and &lt;li&gt; tags to create bulleted lists.
+            </div>
+            <div class="code-example">
+                <pre><code>
+&lt;ul&gt;
+    &lt;li&gt;List item 1&lt;/li&gt;
+    &lt;li&gt;List item 2&lt;/li&gt;
+    &lt;li&gt;List item 3&lt;/li&gt;
+&lt;/ul&gt;
+                </code></pre>
+            </div>
+            <div class="output">
+                <ul>
+                    <li>List item 1</li>
+                    <li>List item 2</li>
+                    <li>List item 3</li>
+                </ul>
+            </div>
+        </section>
+        <section class="tag-box">
+            <h2>6. &lt;ol&gt; and &lt;li&gt; Tags</h2>
+            <div class="definition">
+                <strong>Definition:</strong> The &lt;ol&gt; tag defines an ordered list, and the &lt;li&gt; tag defines a list item.
+            </div>
+            <div class="usage">
+                <strong>Usage:</strong> Use the &lt;ol&gt; and &lt;li&gt; tags to create numbered lists.
+            </div>
+            <div class="code-example">
+                <pre><code>
+&lt;ol&gt;
+    &lt;li&gt;List item 1&lt;/li&gt;
+    &lt;li&gt;List item 2&lt;/li&gt;
+    &lt;li&gt;List item 3&lt;/li&gt;
+&lt;/ol&gt;
+                </code></pre>
+            </div>
+            <div class="output">
+                <ol>
+                    <li>List item 1</li>
+                    <li>List item 2</li>
+                    <li>List item 3</li>
+                </ol>
+            </div>
+        </section>
+        <section class="tag-box">
+            <h2>7. &lt;table&gt;, &lt;tr&gt;, &lt;th&gt;, and &lt;td&gt; Tags</h2>
+            <div class="definition">
+                <strong>Definition:</strong> The &lt;table&gt; tag defines a table, &lt;tr&gt; defines a row, &lt;th&gt; defines a header cell, and &lt;td&gt; defines a data cell.
+            </div>
+            <div class="usage">
+                <strong>Usage:</strong> Use these tags to create and structure tables.
+            </div>
+            <div class="code-example">
+                <pre><code>
+&lt;table border="1"&gt;
+    &lt;tr&gt;
+        &lt;th&gt;Header 1&lt;/th&gt;
+        &lt;th&gt;Header 2&lt;/th&gt;
+    &lt;/tr&gt;
+    &lt;tr&gt;
+        &lt;td&gt;Data 1&lt;/td&gt;
+        &lt;td&gt;Data 2&lt;/td&gt;
+    &lt;/tr&gt;
+&lt;/table&gt;
+                </code></pre>
+            </div>
+            <div class="output">
+                <table border="1">
+                    <tr>
+                        <th>Header 1</th>
+                        <th>Header 2</th>
+                    </tr>
+                    <tr>
+                        <td>Data 1</td>
+                        <td>Data 2</td>
+                    </tr>
+                </table>
+            </div>
+        </section>
+        <section class="tag-box">
+           <h2>8. &lt;form&gt;, &lt;input&gt;, and &lt;button&gt; Tags</h2>
+            <div class="definition">
+                <strong>Definition:</strong> The &lt;form&gt; tag defines an
+      HTML form for user input, &lt;input&gt; is used for input fields, and &lt;button&gt; defines a clickable button.
+            </div>
+            <div class="usage">
+                <strong>Usage:</strong> Use the &lt;form&gt; tag to collect user input and &lt;input&gt; for different types of fields. Use &lt;button&gt; for form submission or other actions.
+            </div>
+            <div class="code-example">
+                <pre><code>
+&lt;form&gt;
+    &lt;input type="text" placeholder=
+    "Enter text"&gt; &lt;button type=
+     "submit"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+                </code></pre>
+            </div>
+            <div class="output">
+                <form>
+                    <input type="text" placeholder="Enter text">
+                    <button type="submit">Submit</button>
+                </form>
+            </div>
+        </section>
+        <section class="tag-box">
+            <h2>9. &lt;div&gt; and &lt;span&gt; Tags</h2>
+            <div class="definition">
+                <strong>Definition:</strong> The &lt;div&gt; tag is a block-level container element, while &lt;span&gt; is an inline container element.
+            </div>
+            <div class="usage">
+                <strong>Usage:</strong> Use &lt;div&gt; for grouping and styling block-level content, and &lt;span&gt; for styling inline content.
+            </div>
+            <div class="code-example">
+                <pre><code>
+&lt;div&gt;This is a div&lt;/div&gt;
+&lt;span&gt;This is a span&lt;/span&gt;
+                </code></pre>
+            </div>
+            <div class="output">
+                <div>This is a div</div>
+                <span>This is a span</span>
+            </div>
+        </section>
+        <section class="tag-box">
+            <h2>10. &lt;video&gt; and &lt;audio&gt; Tags</h2>
+            <div class="definition">
+                <strong>Definition:</strong> The &lt;video&gt; tag is used to embed video content, while the &lt;audio&gt; tag is used for embedding audio content.
+            </div>
+            <div class="usage">
+                <strong>Usage:</strong> Use &lt;video&gt; to include video files with controls, and &lt;audio&gt; to include audio files with controls.
+            </div>
+            <div class="code-example">
+                <pre><code>
+&lt;video controls width="250"&gt;
+    &lt;source src=
+    "http://commondatastorage.
+     googleapis.com/gtv-videos-
+     bucket/sample/BigBuckBunny.
+      mp4" type="video/mp4"&gt;
+    Your browser does not support
+    the video tag.
+&lt;/video&gt;
+
+&lt;audio controls&gt;
+    &lt;source src="https:
+    //www.w3schools.com
+    /html/horse.ogg" type=
+    "audio/ogg"&gt;
+    Your browser does not
+    support the audio tag.
+&lt;/audio&gt;
+                </code></pre>
+            </div>
+            <div class="output">
+                <video controls width="250">
+                    <source src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <audio controls>
+                    <source src="https://www.w3schools.com/html/horse.ogg" type="audio/ogg">
+                    Your browser does not support the audio tag.
+                </audio>
+            </div>
+        </section>
+        <section class="tag-box">
+            <h2>11. &lt;mark&gt; and &lt;small&gt; Tags</h2>
+            <div class="definition">
+                <strong>Definition:</strong> The &lt;mark&gt; tag highlights text, while the &lt;small&gt; tag makes text smaller.
+            </div>
+            <div class="usage">
+                <strong>Usage:</strong> Use &lt;mark&gt; to highlight text and &lt;small&gt; to reduce the font size for less important text.
+            </div>
+            <div class="code-example">
+                <pre><code>
+&lt;mark&gt;This text is highlighted.&lt;/mark&gt;
+&lt;small&gt;This text is small.&lt;/small&gt;
+                </code></pre>
+            </div>
+            <div class="output">
+                <mark>This text is highlighted.</mark>
+                <small>This text is small.</small>
+            </div>
+        </section>
+        <section class="tag-box">
+            <h2>12. &lt;blockquote&gt; Tag</h2>
+            <div class="definition">
+                <strong>Definition:</strong> The &lt;blockquote&gt; tag is used to define a block of text that is a quotation from another source.
+            </div>
+            <div class="usage">
+                <strong>Usage:</strong> Use &lt;blockquote&gt; for longer quotations that need to be highlighted.
+            </div>
+            <div class="code-example">
+                <pre><code>&lt;blockquote&gt;This is a blockquote.
+               &lt;/blockquote&gt;</code></pre>
+            </div>
+            <div class="output">
+                <blockquote>This is a blockquote.</blockquote>
+            </div>
+        </section>
+        <section class="tag-box">
+            <h2>13. &lt;code&gt; Tag</h2>
+            <div class="definition">
+                <strong>Definition:</strong> The &lt;code&gt; tag is used to display a single line of code.
+            </div>
+            <div class="usage">
+                <strong>Usage:</strong> Use &lt;code&gt; for inline code snippets within a text.
+            </div>
+            <div class="code-example">
+                <pre><code>&lt;code&gt;This is code text.&lt;/code&gt;</code></pre>
+            </div>
+            <div class="output">
+                <code>This is code text.</code>
+            </div>
+        </section>
+        <section class="tag-box">
+            <h2>14. &lt;pre&gt; Tag</h2>
+            <div class="definition">
+                <strong>Definition:</strong> The &lt;pre&gt; tag is used to display preformatted text, preserving spaces and line breaks.
+            </div>
+            <div class="usage">
+                <strong>Usage:</strong> Use &lt;pre&gt; for text that requires exact formatting, such as code blocks.
+            </div>
+            <div class="code-example">
+                <pre><code>&lt;pre&gt;This is preformatted text.&lt;/pre&gt;</code></pre>
+            </div>
+            <div class="output">
+                <pre>This is preformatted text.</pre>
+            </div>
+        </section>
+        <section class="tag-box">
+            <h2>15. &lt;br&gt; and &lt;hr&gt; Tags</h2>
+            <div class="definition">
+                <strong>Definition:</strong> The &lt;br&gt; tag inserts a line break, and the &lt;hr&gt; tag inserts a horizontal rule.
+            </div>
+            <div class="usage">
+                <strong>Usage:</strong> Use &lt;br&gt; for line breaks within text, and &lt;hr&gt; for separating sections.
+            </div>
+            <div class="code-example">
+                <pre><code>
+&lt;br&gt; adds a line break.&lt;br&gt;&lt;br&gt;
+&lt;hr&gt; adds a horizontal rule.&lt;hr&gt;
+                </code></pre>
+            </div>
+            <div class="output">
+                <p>&lt;br&gt; adds a line break.<br><br>
+                &lt;hr&gt; adds a horizontal rule.<hr></p>
+            </div>
+        </section>
+        <section class="tag-box">
+            <h2>16. &lt;abbr&gt; and &lt;cite&gt; Tags</h2>
+            <div class="definition">
+                <strong>Definition:</strong> The &lt;abbr&gt; tag is used for abbreviations or acronyms, and the &lt;cite&gt; tag is used to reference the title of a creative work.
+            </div>
+            <div class="usage">
+                <strong>Usage:</strong> Use &lt;abbr&gt; to provide an expanded form of abbreviations and &lt;cite&gt; to reference titles of books, articles, etc.
+            </div>
+            <div class="code-example">
+                <pre><code>
+&lt;abbr title="World Health Organization
+      "&gt;WHO&lt;/abbr&gt;
+&lt;cite&gt;The Great 
+          Gatsby&lt;/cite&gt;
+                </code></pre>
+            </div>
+            <div class="output">
+                <abbr title="World Health
+             Organization">
+            WHO</abbr>
+                <cite>The Great Gatsby</cite>
+            </div>
+        </section>
+        <section class="tag-box">
+            <h2>17. &lt;address&gt; Tag</h2>
+            <div class="definition">
+                <strong>Definition:</strong> The &lt;address&gt; tag is used to provide contact information for the author or owner of a document or an article.
+            </div>
+            <div class="usage">
+                <strong>Usage:</strong> Use &lt;address&gt; to display contact details, such as an email address or a physical address.
+            </div>
+            <div class="code-example">
+                <pre><code>
+&lt;address&gt;
+ Email: &lt;a href=
+ "mailto:example@example
+  .com"&gt;example@
+   example.com&lt;/
+ a&gt;&lt;br&gt;
+ Phone: (123) 456-7890
+&lt;/address&gt;
+                </code></pre>
+            </div>
+            <div class="output">
+                <address>
+                    Email: <a href="mailto:example@example.com">example@example.com</a><br>
+                    Phone: (123) 456-7890
+                </address>
+            </div>
+        </section>
+        <section class="tag-box">
+            <h2>18. &lt;details&gt; and &lt;summary&gt; Tags</h2>
+            <div class="definition">
+                <strong>Definition:</strong> The &lt;details&gt; tag specifies additional details that the user can view or hide, while the &lt;summary&gt; tag provides a heading for the &lt;details&gt; content.
+            </div>
+            
+                <strong>Usage:</strong> Use &lt;details&gt; and &lt;summary&gt; to create expandable content that users can click to reveal or hide.
+            </div>
+            <div class="code-example">
+                <pre><code>
+&lt;details&gt;
+    &lt;summary&gt;More info&lt;/summary&gt;
+    This is additional information.
+&lt;/details&gt;
+                </code></pre>
+            </div>
+            <div class="output">
+                <details>
+                    <summary>More info</summary>
+                    This is additional information.
+                </details>
+            </div>
+        </section>
+        <section class="tag-box">
+           <div class="definition">
+          <h1>Note From Cardomon07</h1>
+           </div>
+          <div class="usage">
+            <p>   There are total <b>67</b> code tags</p>
+          <p>The website is under progress so for now there
+          are only <b>18*</b> Tags </p>
+            <p>We are sorry for the delay </p>
+        </section>
+    </main>
+  
+</body>
+</html>
