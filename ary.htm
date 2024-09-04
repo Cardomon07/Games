@@ -3,26 +3,130 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Hi BSDK</title>
+    <title>Tap Game</title>
     <style>
         body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 50px;
+            background-color: #f0f0f0;
             display: flex;
             justify-content: center;
             align-items: center;
             height: 100vh;
             margin: 0;
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
         }
-        .message {
-            font-size: 2em;
-            color: #333;
+
+        .container {
+            text-align: center;
+        }
+
+        #tapButton {
+            width: 50vw;
+            height: 50vw;
+            max-width: 300px;
+            max-height: 300px;
+            border-radius: 50%;
+            background-color: #4CAF50;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            border: none;
+            outline: none;
+            margin-top: 20px;
+            display: inline-flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        #tapButton:active {
+            background-color: #45a049;
+        }
+
+        #restartButton {
+            display: none;
+            font-size: 16px;
+            padding: 8px 16px;
+            margin-top: 20px;
+            cursor: pointer;
+        }
+
+        p {
+            font-size: 18px;
+            margin: 10px 0;
+        }
+
+        #overview {
+            display: none;
+            font-size: 18px;
+            margin-top: 20px;
         }
     </style>
 </head>
 <body>
-    <div class="message"><h1>Hi BSDK</h1>
-      <p>Thori acchi webpage bana </p>
+    <div class="container">
+        <h1>Tap Game</h1>
+        <p>Tap the button as many times as you can in 10 seconds!</p>
+        <button id="tapButton" onclick="tap()">Tap Me!</button>
+        <p id="score">Score: 0</p>
+        <p id="timeLeft">Time Left: 10s</p>
+        <p id="overview"></p>
+        <button id="restartButton" onclick="restartGame()">Restart</button>
     </div>
+
+    <script>
+        let score = 0;
+        let timeLeft = 10;
+        let gameActive = false;
+        let countdownInterval;
+
+        function tap() {
+            if (!gameActive) {
+                startGame();
+            }
+            score++;
+            document.getElementById('score').innerText = `Score: ${score}`;
+        }
+
+        function startGame() {
+            gameActive = true;
+            countdownInterval = setInterval(updateTime, 1000);
+        }
+
+        function updateTime() {
+            timeLeft--;
+            document.getElementById('timeLeft').innerText = `Time Left: ${timeLeft}s`;
+
+            if (timeLeft === 0) {
+                endGame();
+            }
+        }
+
+        function endGame() {
+            gameActive = false;
+            clearInterval(countdownInterval);
+            document.getElementById('tapButton').disabled = true;
+            document.getElementById('restartButton').style.display = 'block';
+
+            const tapsPerSecond = (score / 10).toFixed(2);
+
+            // Show alert with results
+            alert(`Game Over!\nTotal Taps: ${score}\nTaps per Second: ${tapsPerSecond}`);
+
+            document.getElementById('overview').innerText = `Total Taps: ${score}\nTaps per Second: ${tapsPerSecond}`;
+            document.getElementById('overview').style.display = 'block';
+        }
+
+        function restartGame() {
+            score = 0;
+            timeLeft = 10;
+            gameActive = false;
+            document.getElementById('score').innerText = `Score: ${score}`;
+            document.getElementById('timeLeft').innerText = `Time Left: ${timeLeft}s`;
+            document.getElementById('overview').style.display = 'none';
+            document.getElementById('tapButton').disabled = false;
+            document.getElementById('restartButton').style.display = 'none';
+        }
+    </script>
 </body>
 </html>
