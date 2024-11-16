@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Management</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            margin-top: 30px;
+        }
+        .employee-list {
+            list-style-type: none;
+            padding: 0;
+        }
+        .employee-item {
+            padding: 15px;
+            border: 1px solid #ddd;
+            margin: 10px;
+            border-radius: 10px;
+            background-color: #f9f9f9;
+            text-align: left;
+            width: 300px;
+            margin: 10px auto;
+        }
+        .promote-btn, .restigate-btn {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+            margin-top: 10px;
+            margin-right: 5px;
+        }
+        .promote-btn {
+            background-color: #4CAF50;
+            color: white;
+        }
+        .restigate-btn {
+            background-color: #f44336;
+            color: white;
+        }
+        #warning {
+            font-size: 18px;
+            color: red;
+            display: none;
+        }
+        .restigate-message {
+            font-size: 18px;
+            color: green;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Himalyan Heritage Alliance</h1>
+    <h3>Employee Management System</h3>
+    
+    <ul id="employee-list" class="employee-list"></ul>
+    
+    <div id="warning">
+        <p>Are you sure you want to restigate this employee?</p>
+        <button onclick="confirmRestigate()">Yes, Restigate</button>
+        <button onclick="cancelRestigate()">No, Cancel</button>
+    </div>
+
+    <script>
+        const employees = [
+            { name: "Rajesh Kumar", age: 30, company: "Cardomon" },
+            { name: "Anjali Verma", age: 25, company: "AcOs" },
+            { name: "Sandeep Singh", age: 28, company: "Cardomon" },
+            { name: "Pooja Reddy", age: 34, company: "AcOs" },
+            { name: "Vikram Gupta", age: 26, company: "Cardomon" },
+            { name: "Neha Sharma", age: 29, company: "AcOs" },
+            { name: "Amit Patel", age: 32, company: "Cardomon" },
+            { name: "Priya Desai", age: 27, company: "AcOs" },
+            { name: "Ravi Kumar", age: 35, company: "Cardomon" },
+            { name: "Manisha Yadav", age: 33, company: "AcOs" },
+            { name: "Mohit Bhatia", age: 29, company: "Cardomon" },
+            { name: "Ayesha Khan", age: 24, company: "AcOs" },
+            { name: "Nikhil Mehta", age: 26, company: "Cardomon" },
+            { name: "Simran Gupta", age: 31, company: "AcOs" },
+            { name: "Harish Tiwari", age: 28, company: "Cardomon" },
+            { name: "Kavita Sharma", age: 27, company: "AcOs" },
+            { name: "Deepak Joshi", age: 34, company: "Cardomon" },
+            { name: "Snehal Patel", age: 32, company: "AcOs" },
+            { name: "Tarun Agarwal", age: 29, company: "Cardomon" },
+            { name: "Anita Gupta", age: 30, company: "AcOs" },
+            { name: "Ramesh Verma", age: 33, company: "Cardomon" },
+            { name: "Suman Dubey", age: 28, company: "AcOs" },
+            { name: "Gaurav Yadav", age: 27, company: "Cardomon" },
+            { name: "Shalini Mehra", age: 31, company: "AcOs" },
+            { name: "Sunil Verma", age: 34, company: "Cardomon" },
+            { name: "Kiran Rawat", age: 29, company: "AcOs" },
+            { name: "Manoj Singh", age: 28, company: "Cardomon" },
+            { name: "Rekha Rani", age: 30, company: "AcOs" },
+            { name: "Pradeep Kumar", age: 27, company: "Cardomon" },
+            { name: "Ritu Agarwal", age: 33, company: "AcOs" },
+            { name: "Dinesh Joshi", age: 32, company: "Cardomon" },
+            { name: "Madhuri Devi", age: 26, company: "AcOs" },
+            { name: "Ajay Sharma", age: 28, company: "Cardomon" },
+            { name: "Sonia Singh", age: 34, company: "AcOs" },
+            { name: "Pankaj Kumar", age: 27, company: "Cardomon" },
+            { name: "Tanvi Mehra", age: 29, company: "AcOs" }
+        ];
+
+        // Sort employees alphabetically by name
+        employees.sort((a, b) => a.name.localeCompare(b.name));
+
+        let currentIndex = 0;
+        let employeeToRestigate = null;
+
+        function displayEmployees() {
+            const listContainer = document.getElementById('employee-list');
+            listContainer.innerHTML = '';
+            employees.forEach((employee, index) => {
+                const listItem = document.createElement('li');
+                listItem.className = 'employee-item';
+                listItem.innerHTML = `
+                    <strong>Name:</strong> ${employee.name} 
+                    <br><strong>Age:</strong> ${employee.age}
+                    <br><strong>Company:</strong> ${employee.company}
+                    <br>
+                    <button class="promote-btn" onclick="promoteEmployee(${index})">Promote</button>
+                    <button class="restigate-btn" onclick="restigateEmployee(${index})">Restigate</button>
+                    <div id="restigate-message-${index}" class="restigate-message">
+                        Request to restigate has been submitted.
+                    </div>
+                `;
+                listContainer.appendChild(listItem);
+            });
+        }
+
+        function promoteEmployee(index) {
+            alert('Promotion request submitted for ' + employees[index].name);
+        }
+
+        function restigateEmployee(index) {
+            alert('Restigation request submitted for ' + employees[index].name);
+        }
+            
+
+        // Display employees on page load
+        displayEmployees();
+    </script>
+</body>
+</html>
