@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACoS Ammunition</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+      text-align: center;
+    }
+    .page {
+      display: none;
+    }
+    .active {
+      display: block;
+    }
+    form {
+      margin: 20px auto;
+      max-width: 300px;
+    }
+    input, select, button {
+      display: block;
+      width: 100%;
+      margin: 10px 0;
+      padding: 5px;
+      font-size: 14px;
+    }
+    button {
+      cursor: pointer;
+      background-color: #007bff;
+      color: white;
+      border: none;
+      border-radius: 3px;
+    }
+    button:hover {
+      background-color: #0056b3;
+    }
+    table {
+      margin: 20px auto;
+      border-collapse: collapse;
+      width: 80%;
+    }
+    th, td {
+      border: 1px solid #ddd;
+      padding: 8px;
+      text-align: left;
+      font-size: 14px;
+    }
+    th {
+      background-color: #f4f4f4;
+    }
+  </style>
+</head>
+<body>
+
+<div id="page1" class="page active">
+  <h1>ACoS Ammunition</h1>
+  <form id="loginForm">
+    <label for="name">Name of Customer:</label>
+    <input type="text" id="name" name="name" required>
+    
+    <label for="item">Item:</label>
+    <select id="item" name="item" required>
+      <option value="583">Silver GP - ₹583/kg</option>
+      <option value="894">Gandak GP - ₹894/kg</option>
+      <option value="412">Red GP - ₹412/kg</option>
+      <option value="687">Seagoal GP - ₹687/kg</option>
+      <option value="523">Smock GP - ₹523/kg</option>
+    </select>
+    
+    <label for="quantity">Quantity:</label>
+    <input type="number" id="quantity" name="quantity" min="1" required>    
+    <button type="button" onclick="generateBill()">Submit</button>
+  </form>
+</div>
+
+<div id="page2" class="page">
+  <h1>Bill</h1>
+  <table>
+    <tr>
+      <th>Customer Name</th>
+      <td id="billName"></td>
+    </tr>
+    <tr>
+      <th>Item</th>
+      <td id="billItem"></td>
+    </tr>
+    <tr>
+      <th>Quantity</th>
+      <td id="billQuantity"></td>
+    </tr>
+    <tr>
+      <th>Price per Item</th>
+      <td id="billPrice"></td>
+    </tr>
+    <tr>
+      <th>Subtotal</th>
+      <td id="billSubtotal"></td>
+    </tr>
+    <tr>
+      <th>GST (18%)</th>
+      <td id="billGST"></td>
+    </tr>
+    <tr>
+      <th>Other Costs</th>
+      <td>₹50</td>
+    </tr>
+    <tr>
+      <th>Total</th>
+      <td id="billTotal"></td>
+    </tr>
+  </table>
+  <button onclick="goBack()">Back</button>
+</div>
+
+<script>
+  function generateBill() {
+    const name = document.getElementById('name').value;
+    const itemSelect = document.getElementById('item');
+    const itemPrice = parseInt(itemSelect.value);
+    const itemText = itemSelect.options[itemSelect.selectedIndex].text;
+    const quantity = parseInt(document.getElementById('quantity').value);
+    const subtotal = itemPrice * quantity;
+    const gst = subtotal * 0.18;
+    const total = subtotal + gst + 50;
+
+    // Fill bill details
+    document.getElementById('billName').innerText = name;
+    document.getElementById('billItem').innerText = itemText;
+    document.getElementById('billQuantity').innerText = quantity;
+    document.getElementById('billPrice').innerText = `₹${itemPrice}`;
+    document.getElementById('billSubtotal').innerText = `₹${subtotal.toFixed(2)}`;
+    document.getElementById('billGST').innerText = `₹${gst.toFixed(2)}`;
+    document.getElementById('billTotal').innerText = `₹${total.toFixed(2)}`;
+
+    // Switch to the bill page
+    document.getElementById('page1').classList.remove('active');
+    document.getElementById('page2').classList.add('active');
+  }
+
+  function goBack() {
+    // Switch back to the login form
+    document.getElementById('page2').classList.remove('active');
+    document.getElementById('page1').classList.add('active');
+  }
+</script>
+
+</body>
+</html>
