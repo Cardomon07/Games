@@ -1,0 +1,236 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Uttaranchal Verification Portal</title>
+  <style>
+    body {
+      font-family: 'Segoe UI', sans-serif;
+      background-color: #f2f2f2;
+      margin: 0;
+      padding: 0;
+    }
+
+    header {
+      background-color: #003366;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 40px auto;
+      background: white;
+      padding: 30px;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    }
+
+    .doc {
+      margin: 20px 0;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+    .doc button {
+      padding: 10px 20px;
+      cursor: pointer;
+      background-color: #e0e0e0;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    .doc .status {
+      font-size: 20px;
+    }
+
+    .photo-verification {
+      margin: 30px 0;
+      text-align: center;
+    }
+
+    .circle {
+      width: 50px;
+      height: 50px;
+      background-color: red;
+      border-radius: 50%;
+      margin: 10px auto;
+      cursor: pointer;
+    }
+
+    .submit-btn {
+      display: block;
+      width: 100%;
+      padding: 12px;
+      background-color: #004d00;
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-size: 16px;
+      cursor: not-allowed;
+      opacity: 0.6;
+    }
+
+    .submit-btn.enabled {
+      cursor: pointer;
+      opacity: 1;
+    }
+
+    .result-page {
+      display: none;
+      margin-top: 30px;
+    }
+
+    .result-page h2 {
+      text-align: center;
+      color: #004d00;
+    }
+
+    .result-page p {
+      font-size: 18px;
+    }
+  </style>
+</head>
+<body>
+
+  <header>
+    <h1>Uttranchal Residential Card</h1>
+  </header>
+
+  <div class="container" id="mainContainer">
+
+    <div class="doc" data-name="UPC">
+      <span>Uttaranchal People Card (UPC)</span>
+      <button onclick="simulateUpload(this)">Upload</button>
+      <span class="status">⌛</span>
+    </div>
+
+    <div class="doc" data-name="Income">
+      <span>Income Certificate</span>
+      <button onclick="simulateUpload(this)">Upload</button>
+      <span class="status">⌛</span>
+    </div>
+
+    <div class="doc" data-name="Residential">
+      <span>Residential Papers</span>
+      <button onclick="simulateUpload(this)">Upload</button>
+      <span class="status">⌛</span>
+    </div>
+
+    <div class="doc" data-name="OfficeID">
+      <span>Office ID Card</span>
+      <button onclick="simulateUpload(this)">Upload</button>
+      <span class="status">⌛</span>
+    </div>
+
+    <div class="photo-verification">
+      <span>Photo Verification</span>
+      <button onclick="simulateUpload(this)">Upload</button>
+      <span class="status">⌛</span>
+      <div class="circle" onclick="toggleCircle(this)"></div>
+    </div>
+
+    <button id="submitBtn" class="submit-btn" onclick="submitForm()">Submit</button>
+
+    <div class="result-page" id="resultPage">
+      <h2>Verification Summary</h2>
+      <p><strong>Name:</strong> <span id="rName"></span></p>
+      <p><strong>Age:</strong> <span id="rAge"></span></p>
+      <p><strong>UPC:</strong> <span id="rUPC"></span></p>
+      <p><strong>Income Certificate:</strong> <span id="rIncome"></span></p>
+      <p><strong>Residential Papers:</strong> <span id="rResidential"></span></p>
+      <p><strong>Office ID:</strong> <span id="rOfficeID"></span></p>
+      <p><strong>Photo Verified:</strong> <span id="rPhoto"></span></p>
+    </div>
+
+  </div>
+
+  <script>
+    const names = ["Ravi Kumar", "Meena Joshi", "Vikram Singh", "Sonal Rawat", "Pooja Thapa", "Anil Negi"];
+    const ageRange = [18, 65];
+
+    let uploads = {
+      UPC: false,
+      Income: false,
+      Residential: false,
+      OfficeID: false
+    };
+
+    let photoVerified = false;
+
+    function simulateUpload(btn) {
+      const statusEl = btn.nextElementSibling;
+      btn.disabled = true;
+      statusEl.textContent = "Uploading...";
+
+      setTimeout(() => {
+        const success = Math.random() > 0.2;
+        const docType = btn.parentElement.getAttribute("data-name");
+
+        if (success) {
+          statusEl.textContent = "✔️";
+          uploads[docType] = true;
+        } else {
+          statusEl.textContent = "❌";
+          uploads[docType] = false;
+          btn.disabled = false;
+        }
+
+        checkReadyToSubmit();
+      }, 1000);
+    }
+
+    function toggleCircle(el) {
+      if (el.style.backgroundColor === "green") {
+        el.style.backgroundColor = "red";
+        photoVerified = false;
+      } else {
+        el.style.backgroundColor = "green";
+        photoVerified = true;
+      }
+      checkReadyToSubmit();
+    }
+
+    function checkReadyToSubmit() {
+      const uploadCount = Object.values(uploads).filter(v => v).length;
+      const canSubmit = uploadCount >= 3 && photoVerified;
+
+      const submitBtn = document.getElementById("submitBtn");
+      if (canSubmit) {
+        submitBtn.classList.add("enabled");
+        submitBtn.disabled = false;
+        submitBtn.style.cursor = "pointer";
+      } else {
+        submitBtn.classList.remove("enabled");
+        submitBtn.disabled = true;
+        submitBtn.style.cursor = "not-allowed";
+      }
+    }
+
+    function getRandomName() {
+      return names[Math.floor(Math.random() * names.length)];
+    }
+
+    function getRandomAge() {
+      return Math.floor(Math.random() * (ageRange[1] - ageRange[0]) + ageRange[0]);
+    }
+
+    function submitForm() {
+      document.getElementById("resultPage").style.display = "block";
+      document.getElementById("rName").textContent = getRandomName();
+      document.getElementById("rAge").textContent = getRandomAge();
+      document.getElementById("rUPC").textContent = uploads.UPC ? "Yes" : "No";
+      document.getElementById("rIncome").textContent = uploads.Income ? "Yes" : "No";
+      document.getElementById("rResidential").textContent = uploads.Residential ? "Yes" : "No";
+      document.getElementById("rOfficeID").textContent = uploads.OfficeID ? "Yes" : "No";
+      document.getElementById("rPhoto").textContent = photoVerified ? "Yes" : "No";
+
+      // Scroll to result
+      document.getElementById("mainContainer").scrollIntoView({ behavior: 'smooth' });
+    }
+  </script>
+
+</body>
+</html>
